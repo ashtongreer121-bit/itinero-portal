@@ -27,8 +27,10 @@ export default function CalendarView({ trips }: { trips: Trip[] }) {
     })
   }
 
-  const cells = Array.from({ length: firstDay }, () => null)
-    .concat(Array.from({ length: daysInMonth }, (_, i) => i + 1))
+  const cells: (number | null)[] = [
+    ...Array.from({ length: firstDay }, () => null),
+    ...Array.from({ length: daysInMonth }, (_, i) => i + 1),
+  ]
 
   // pad to full weeks
   while (cells.length % 7 !== 0) cells.push(null)
