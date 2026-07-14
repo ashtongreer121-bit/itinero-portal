@@ -21,8 +21,7 @@ export async function POST(req: NextRequest) {
   if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
   const body = await req.json()
-  const { data: num } = await supabase.rpc('nextval', { seq: 'invoice_number_seq' }).single().catch(() => ({ data: Date.now() }))
-  const invoice_number = `INV-${String(num ?? Date.now()).slice(-4).padStart(4, '0')}`
+  const invoice_number = `INV-${String(Date.now()).slice(-4).padStart(4, '0')}`
 
   const { data, error } = await supabase
     .from('invoices')
